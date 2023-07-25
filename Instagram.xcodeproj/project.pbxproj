@@ -16,6 +16,7 @@
 		C66FA31D2A6FD819008A40A9 /* InstagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA31C2A6FD819008A40A9 /* InstagramTests.swift */; };
 		C66FA3272A6FD81A008A40A9 /* InstagramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA3262A6FD81A008A40A9 /* InstagramUITests.swift */; };
 		C66FA3292A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA3282A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift */; };
+		C66FA3362A6FF504008A40A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA3352A6FF504008A40A9 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C66FA3222A6FD81A008A40A9 /* InstagramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstagramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C66FA3262A6FD81A008A40A9 /* InstagramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITests.swift; sourceTree = "<group>"; };
 		C66FA3282A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C66FA3352A6FF504008A40A9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				C66FA30E2A6FD819008A40A9 /* Assets.xcassets */,
 				C66FA3102A6FD819008A40A9 /* LaunchScreen.storyboard */,
 				C66FA3132A6FD819008A40A9 /* Info.plist */,
+				C66FA3352A6FF504008A40A9 /* Extensions.swift */,
 			);
 			path = Instagram;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				C66FA30A2A6FD817008A40A9 /* ViewController.swift in Sources */,
 				C66FA3062A6FD817008A40A9 /* AppDelegate.swift in Sources */,
 				C66FA3082A6FD817008A40A9 /* SceneDelegate.swift in Sources */,
+				C66FA3362A6FF504008A40A9 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
