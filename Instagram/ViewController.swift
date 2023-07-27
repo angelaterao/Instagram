@@ -7,15 +7,41 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+import FirebaseStorage
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "add-photo")
         button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func handleAddPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let originalImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerOriginalImage") ] as? UIImage {
+            plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.lightPeach.cgColor
+        plusPhotoButton.layer.borderWidth = 2
+
+        dismiss(animated: true)
+    }
     
     lazy var emailTextField: UITextField = {
         let tf = UITextField()
@@ -33,7 +59,7 @@ class ViewController: UIViewController {
         tf.borderStyle = .roundedRect
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.font = UIFont.systemFont(ofSize: 14)
-        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged) 
         return tf
     }()
     
@@ -89,6 +115,50 @@ class ViewController: UIViewController {
             }
             
             print("Success creating user: ", user?.user.uid ?? "")
+
+            
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+            
+            let fileName = NSUUID().uuidString
+            let storageDir = Storage.storage().reference().child("profile_images").child(fileName)
+            
+            // Saving image to Storage
+            
+            storageDir.putData(uploadData) { metadata, err in
+                if let err = err {
+                    print("Failed at saving image to storage: ", err)
+                    return
+                }
+                
+                // Getting the image's URL
+                
+                storageDir.downloadURL { url, err in
+                    if let err = err {
+                        print("Failed at getting URL's image: ", err)
+                        return
+                    }
+                    
+                    guard let urlString = url?.absoluteString else { return }
+                    print("Success :", urlString)
+                    
+                    // Saving user and profile image's URL to database
+                    
+                    guard let uid = user?.user.uid else { return }
+
+                    let dictionaryValues = ["username": username, "profileImageURL": urlString]
+                    let values = [uid:dictionaryValues]
+
+                    Database.database().reference().child("users").updateChildValues(values) { err, ref in
+                        if let err = err {
+                            print("Failed to save user info into database: ", err)
+                            return
+                        }
+
+                        print("Sucessfully saved user info into database")
+                    }
+                }
+            }
         }
     }
 
