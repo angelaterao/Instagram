@@ -90,6 +90,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return button
     }()
     
+    
     @objc private func handleTextInputChange() {
         
         let isFormValid = emailTextField.text?.count ?? 0 > 0 && usernameTextField.text?.count ?? 0 > 0 &&  passwordTextField.text?.count ?? 0 > 0
@@ -121,11 +122,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
             
             let fileName = NSUUID().uuidString
-            let storageDir = Storage.storage().reference().child("profile_images").child(fileName)
+            let storageRef = Storage.storage().reference().child("profile_images").child(fileName)
             
             // Saving image to Storage
             
-            storageDir.putData(uploadData) { metadata, err in
+            storageRef.putData(uploadData) { metadata, err in
                 if let err = err {
                     print("Failed at saving image to storage: ", err)
                     return
@@ -133,7 +134,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 // Getting the image's URL
                 
-                storageDir.downloadURL { url, err in
+                storageRef.downloadURL { url, err in
                     if let err = err {
                         print("Failed at getting URL's image: ", err)
                         return
@@ -229,3 +230,26 @@ extension UIView {
 }
 
 
+class FirstVC: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .blue
+    }
+}
+
+class SecondVC: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .red
+    }
+}
+
+class ThirdVC: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .yellow
+    }
+}
