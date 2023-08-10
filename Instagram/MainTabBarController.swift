@@ -12,18 +12,26 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let userProfileController = UserProfileController(collectionViewLayout: layout)
+        let userProfilelayout = UICollectionViewFlowLayout()
+        userProfilelayout.scrollDirection = .vertical
+        let userProfileController = UserProfileController(collectionViewLayout: userProfilelayout)
 
-        let navController = UINavigationController(rootViewController: userProfileController)
+        let userProfileNavController = UINavigationController(rootViewController: userProfileController)
         
-        navController.tabBarItem.image = UIImage(named: "profile_unselected")
-        navController.tabBarItem.selectedImage = UIImage(named: "profile_selected")
+        userProfileNavController.tabBarItem.image = UIImage(named: "profile_unselected")
+        userProfileNavController.tabBarItem.selectedImage = UIImage(named: "profile_selected")
+        
+        let homeLayout = UICollectionViewFlowLayout()
+        homeLayout.scrollDirection = .vertical
+        let homeController = HomeController(collectionViewLayout: homeLayout)
+        let homeNavController = UINavigationController(rootViewController: homeController)
+        
+        homeNavController.tabBarItem.image = UIImage(named: "home unselected")
+        homeNavController.tabBarItem.selectedImage = UIImage(named: "home selected")
         
         tabBar.tintColor = .black
         
-        self.viewControllers = [navController, UIViewController()]
+        self.viewControllers = [homeNavController, userProfileNavController]
         
     }
 }

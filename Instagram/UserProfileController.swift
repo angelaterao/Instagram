@@ -29,10 +29,10 @@ class UserProfileController: UICollectionViewController {
             let username = dictionnary?["username"] as? String
                 
             self.navigationItem.title = username
-        
-            //prochaine fois: voir comment savoir sion ecrit as! ou as? quelle est la diff?
+        } withCancel: { err in
+            print("Failed to fetch user:", err)
         }
-        
+
     }
     
 }
