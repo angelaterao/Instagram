@@ -29,6 +29,15 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hello world ! \nThis is my insta."
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.numberOfLines = 0
+//        label.textColor = .lightGray
+        return label
+    }()
+    
     let gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "grid"), for: .normal)
@@ -93,10 +102,19 @@ class UserProfileHeader: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setTitle("Edit Profile", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
-        button.layer.borderWidth = 1
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor(white: 0, alpha: 0.1)
+        return button
+    }()
+    
+    let shareProfileButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Share Profile", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor(white: 0, alpha: 0.1)
         return button
     }()
     
@@ -106,18 +124,32 @@ class UserProfileHeader: UICollectionViewCell {
         
         addSubview(profileImageView)
         addSubview(usernameLabel)
-        addSubview(editProfileButton)
+        addSubview(descriptionLabel)
         
         profileImageView.anchor(top: topAnchor, paddingTop: 12, bottom: nil, paddingBottom: 0, right: nil, paddingRight: 0, left: leftAnchor, paddingLeft: 12, height: 80, width: 80)
         
         setupBottomToolBar()
         
-        usernameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 0, bottom: gridButton.topAnchor, paddingBottom: 0, right: rightAnchor, paddingRight: 12, left: leftAnchor, paddingLeft: 12, height: nil, width: nil)
+        usernameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 8, bottom: nil, paddingBottom: 0, right: rightAnchor, paddingRight: 12, left: leftAnchor, paddingLeft: 12, height: 20, width: nil)
+        
+        descriptionLabel.anchor(top: usernameLabel.bottomAnchor, paddingTop: 3, bottom: nil, paddingBottom: 0, right: rightAnchor, paddingRight: 12, left: leftAnchor, paddingLeft: 12, height: 40, width: nil)
         
         setupUserStatsView()
         
-        editProfileButton.anchor(top: postsLabel.bottomAnchor, paddingTop: 8, bottom: nil, paddingBottom: 0, right: followingLabel.rightAnchor, paddingRight: 0, left: postsLabel.leftAnchor, paddingLeft: 0, height: 34, width: nil)
+        setupProfileButtons()
 
+    }
+    
+    fileprivate func setupProfileButtons() {
+        let stackView = UIStackView(arrangedSubviews: [editProfileButton, shareProfileButton])
+        
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
+        
+        addSubview(stackView)
+        
+        stackView.anchor(top: nil, paddingTop: 0, bottom: gridButton.topAnchor, paddingBottom: 8, right: usernameLabel.rightAnchor, paddingRight: 0, left: usernameLabel.leftAnchor, paddingLeft: 0, height: 30, width: nil)
+        
     }
     
     fileprivate func setupUserStatsView() {
@@ -131,10 +163,7 @@ class UserProfileHeader: UICollectionViewCell {
     }
     
     fileprivate func setupBottomToolBar() {
-        
-        let topDividerView = UIView()
-        topDividerView.backgroundColor = .lightGray
-        
+
         let bottomDividerView = UIView()
         bottomDividerView.backgroundColor = .lightGray
         
@@ -144,12 +173,10 @@ class UserProfileHeader: UICollectionViewCell {
         stackView.distribution = .fillEqually
         
         addSubview(stackView)
-        addSubview(topDividerView)
+
         addSubview(bottomDividerView)
         
         stackView.anchor(top: nil, paddingTop: 0, bottom: bottomAnchor, paddingBottom: 0, right: rightAnchor, paddingRight: 0, left: leftAnchor, paddingLeft: 0, height: 50, width: 0)
-        
-        topDividerView.anchor(top: stackView.topAnchor, paddingTop: 0, bottom: nil, paddingBottom: 0, right: rightAnchor, paddingRight: 0, left: leftAnchor, paddingLeft: 0, height: 0.2, width: nil)
         
         bottomDividerView.anchor(top: stackView.bottomAnchor, paddingTop: 0, bottom: nil, paddingBottom: 0, right: rightAnchor, paddingRight: 0, left: leftAnchor, paddingLeft: 0, height: 0.2, width: nil)
         

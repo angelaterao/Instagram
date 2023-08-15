@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
 
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.configureWithDefaultBackground()
+        navigationBarAppearance.configureWithTransparentBackground()
         UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
 
         window = UIWindow(windowScene: windowScene)
