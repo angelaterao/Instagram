@@ -31,7 +31,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         tabBar.tintColor = .black
         
-        self.viewControllers = [homeNavController, userProfileNavController]
+        self.viewControllers = [userProfileNavController, homeNavController]
         
     }
 }
