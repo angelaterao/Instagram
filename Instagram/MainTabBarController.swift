@@ -6,11 +6,23 @@
 //
 
 import UIKit
+import Firebase
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Auth.auth().currentUser == nil {
+
+            DispatchQueue.main.async {
+                let loginController = LoginController()
+                let navController = UINavigationController(rootViewController: loginController)
+                navController.modalPresentationStyle = .fullScreen
+                self.present(navController, animated: true)
+            }
+            return
+        }
         
         let userProfilelayout = UICollectionViewFlowLayout()
         userProfilelayout.scrollDirection = .vertical
