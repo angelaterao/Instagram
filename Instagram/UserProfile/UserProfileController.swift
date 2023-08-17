@@ -32,6 +32,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     fileprivate func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
+        
     }
     
     @objc fileprivate func handleLogOut() {
@@ -41,6 +42,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             do {
                 try Auth.auth().signOut()
                 print("Sucessfully logged out")
+                self.present(MainTabBarController(), animated: true)
             } catch let logOutErr {
                 print("Error logging out: ", logOutErr)
             }

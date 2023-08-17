@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class LoginController: UIViewController {
     
@@ -30,7 +32,7 @@ class LoginController: UIViewController {
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.font = UIFont.systemFont(ofSize: 14)
         
-//        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
@@ -42,7 +44,7 @@ class LoginController: UIViewController {
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.font = UIFont.systemFont(ofSize: 14)
 
-//        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
+        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
@@ -57,10 +59,38 @@ class LoginController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
         button.layer.shadowOpacity = 0.4
         button.layer.shadowRadius = 0.0
-//        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         button.isEnabled = false
         return button
     }()
+    
+    @objc private func handleTextInputChange() {
+        
+        let isFormValid = emailTextField.text?.count ?? 0 > 0 && passwordTextField.text?.count ?? 0 > 0
+        
+        if isFormValid {
+            signInButton.isEnabled = true
+            signInButton.backgroundColor = UIColor.darkPeach
+        } else {
+            signInButton.isEnabled = false
+            signInButton.backgroundColor = UIColor.lightPeach
+        }
+    }
+    
+    @objc private func handleSignIn() {
+        guard let email = emailTextField.text, email.count > 0 else { return }
+        guard let password = passwordTextField.text, password.count > 0 else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { data, err in
+            if let err = err {
+                print("Couldn't sign in:", err)
+            }
+            
+            if data != nil {
+                self.navigationController?.pushViewController(MainTabBarController(), animated: true)
+            }
+        }
+    }
     
     lazy var dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
