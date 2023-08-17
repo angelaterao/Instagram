@@ -14,7 +14,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        let image = UIImage(named: "add-photo")
+        let image = UIImage(named: "addphoto")
         button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
         return button
@@ -37,7 +37,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
-        plusPhotoButton.layer.borderColor = UIColor.lightPeach.cgColor
+        plusPhotoButton.layer.borderColor = UIColor.darkPeach.cgColor
         plusPhotoButton.layer.borderWidth = 2
 
         dismiss(animated: true)
@@ -89,6 +89,19 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         button.isEnabled = false
         return button
     }()
+    
+    lazy var alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        let attributedText = NSMutableAttributedString(string: "Already have an account? ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        attributedText.append(NSMutableAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.darkPeach]))
+        button.setAttributedTitle(attributedText, for: .normal)
+        button.addTarget(self, action: #selector(handleShowSignIn), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc fileprivate func handleShowSignIn() {
+        navigationController?.popViewController(animated: true)
+    }
     
     
     @objc private func handleTextInputChange() {
@@ -169,6 +182,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         view.backgroundColor = .white
         
         view.addSubview(plusPhotoButton)
+        view.addSubview(alreadyHaveAccountButton)
         
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
@@ -176,6 +190,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         
         setupSignUpFields()
+        
+        alreadyHaveAccountButton.anchor(top: nil, paddingTop: 0, bottom: view.bottomAnchor, paddingBottom: 10, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 50, width: 0)
         
     }
     
@@ -232,26 +248,3 @@ extension UIView {
 }
 
 
-class FirstVC: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .blue
-    }
-}
-
-class SecondVC: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-    }
-}
-
-class ThirdVC: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .yellow
-    }
-}
