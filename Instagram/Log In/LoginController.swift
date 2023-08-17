@@ -23,23 +23,25 @@ class LoginController: UIViewController {
         return view
     }()
     
-    lazy var emailTextField: UITextField = {
-        let tf = UITextField()
+    lazy var emailTextField: LowercaseTextField = {
+        let tf = LowercaseTextField()
         tf.placeholder = "Email"
         tf.borderStyle = .roundedRect
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.font = UIFont.systemFont(ofSize: 14)
+        
 //        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
     
-    lazy var passwordTextField: UITextField = {
-        let tf = UITextField()
+    lazy var passwordTextField: LowercaseTextField = {
+        let tf = LowercaseTextField()
         tf.placeholder = "Password"
         tf.isSecureTextEntry = true
         tf.borderStyle = .roundedRect
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.font = UIFont.systemFont(ofSize: 14)
+
 //        tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
@@ -82,6 +84,7 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeHideKeyboard()
         
         view.backgroundColor = .white
         navigationController?.isNavigationBarHidden = true
@@ -93,7 +96,7 @@ class LoginController: UIViewController {
         
         setupSignInFields()
         
-        dontHaveAccountButton.anchor(top: nil, paddingTop: 0, bottom: view.bottomAnchor, paddingBottom: 10, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 50, width: 0)
+        dontHaveAccountButton.anchor(top: nil, paddingTop: 0, bottom: view.bottomAnchor, paddingBottom: 15, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 50, width: 0)
 
     }
     

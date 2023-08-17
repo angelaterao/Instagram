@@ -43,8 +43,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         dismiss(animated: true)
     }
     
-    lazy var emailTextField: UITextField = {
-        let tf = UITextField()
+    lazy var emailTextField: LowercaseTextField = {
+        let tf = LowercaseTextField()
         tf.placeholder = "Email"
         tf.borderStyle = .roundedRect
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
@@ -53,8 +53,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return tf
     }()
     
-    lazy var usernameTextField: UITextField = {
-        let tf = UITextField()
+    lazy var usernameTextField: LowercaseTextField = {
+        let tf = LowercaseTextField()
         tf.placeholder = "Username"
         tf.borderStyle = .roundedRect
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
@@ -63,8 +63,8 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return tf
     }()
     
-    lazy var passwordTextField: UITextField = {
-        let tf = UITextField()
+    lazy var passwordTextField: LowercaseTextField = {
+        let tf = LowercaseTextField()
         tf.placeholder = "Password"
         tf.isSecureTextEntry = true
         tf.borderStyle = .roundedRect
@@ -178,6 +178,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeHideKeyboard()
         
         view.backgroundColor = .white
         
@@ -191,7 +192,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         setupSignUpFields()
         
-        alreadyHaveAccountButton.anchor(top: nil, paddingTop: 0, bottom: view.bottomAnchor, paddingBottom: 10, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 50, width: 0)
+        alreadyHaveAccountButton.anchor(top: nil, paddingTop: 0, bottom: view.bottomAnchor, paddingBottom: 15, right: view.rightAnchor, paddingRight: 0, left: view.leftAnchor, paddingLeft: 0, height: 50, width: 0)
         
     }
     
@@ -213,38 +214,21 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
 }
 
-extension UIView {
+
+
+class LowercaseTextField: UITextField {
     
-    func anchor(top: NSLayoutYAxisAnchor?, paddingTop: CGFloat, bottom: NSLayoutYAxisAnchor?, paddingBottom: CGFloat, right: NSLayoutXAxisAnchor?,  paddingRight: CGFloat, left: NSLayoutXAxisAnchor?, paddingLeft: CGFloat, height: CGFloat?, width: CGFloat?) {
-        
-        self.translatesAutoresizingMaskIntoConstraints = false
-        
-        if let top = top {
-            self.topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
-        }
-        
-        if let bottom = bottom {
-            self.bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom).isActive = true
-        }
-        
-        if let right = right {
-            self.rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
-        }
-        
-        if let left = left {
-            self.leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
-        }
-        
-        if let height = height {
-            self.heightAnchor.constraint(equalToConstant: height).isActive = true
-        }
-        
-        if let width = width {
-            self.widthAnchor.constraint(equalToConstant: width).isActive = true
-        }
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        lowercaseInit()
+    }
+    
+    private func lowercaseInit() {
+        autocapitalizationType = .none
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
-
-
