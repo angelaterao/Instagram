@@ -24,6 +24,13 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
             return
         }
         
+        setupViewControllers()
+    
+        
+    }
+    
+    func setupViewControllers() {
+        
         let userProfilelayout = UICollectionViewFlowLayout()
         userProfilelayout.scrollDirection = .vertical
         let userProfileController = UserProfileController(collectionViewLayout: userProfilelayout)
@@ -44,6 +51,5 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.tintColor = .black
         
         self.viewControllers = [userProfileNavController, homeNavController]
-        
     }
 }

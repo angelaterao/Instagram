@@ -81,14 +81,16 @@ class LoginController: UIViewController {
         guard let email = emailTextField.text, email.count > 0 else { return }
         guard let password = passwordTextField.text, password.count > 0 else { return }
         
-        Auth.auth().signIn(withEmail: email, password: password) { data, err in
+        Auth.auth().signIn(withEmail: email, password: password) { user, err in
             if let err = err {
-                print("Couldn't sign in:", err)
+                print("Failed to sign in:", err)
             }
             
-            if data != nil {
-                self.navigationController?.pushViewController(MainTabBarController(), animated: true)
-            }
+            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+            
+            mainTabBarController.setupViewControllers()
+            self.dismiss(animated: true)
+            
         }
     }
     
