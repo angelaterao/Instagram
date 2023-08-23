@@ -104,7 +104,7 @@ class LoginController: UIViewController {
     }()
     
     @objc func handleShowSignUp() {
-        print("Trying to show sing up controller")
+        print("Trying to show sign up controller")
         let signUpController = SignUpController()
         
         navigationController?.pushViewController(signUpController, animated: true)

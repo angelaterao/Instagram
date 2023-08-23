@@ -45,6 +45,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
                 
                 let loginController = LoginController()
                 let navController = UINavigationController(rootViewController: loginController)
+                navController.modalPresentationStyle = .fullScreen
                 self.present(navController, animated: true)
                 
             } catch let logOutErr {
