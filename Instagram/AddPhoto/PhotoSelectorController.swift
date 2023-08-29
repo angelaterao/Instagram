@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
     let headerId = "headerId"
+    
+    var images = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,21 +24,57 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         self.modalPresentationCapturesStatusBarAppearance = true
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        
+        fetchPhotos()
+        
+    }
+    
+    fileprivate func fetchPhotos() {
+        print("fetching photos")
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 10
+        let sortDescription = NSSortDescriptor(key: "creationDate", ascending: false) //to get latest photos
+        fetchOptions.sortDescriptors = [sortDescription]
+        
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        
+        allPhotos.enumerateObjects { asset, count, stop in
+            
+            let imageManager = PHImageManager.default()
+            let targetSize = CGSize(width: 350, height: 350) //Taille de l'image
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true //Pour que toutes les photos aient la meme taille
+            
+            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { image, info in
+                
+                if let image = image {
+                    self.images.append(image)
+                }
+                
+                // On cherche à rafraichir le collectionView. Pour savoir combien de fois, on calcule count (qui commence à 0, donc on doit faire allPhotos.count (il y en a 10) - 1).
+                if count == allPhotos.count - 1 {
+                    self.collectionView.reloadData()
+                }
+            }
+            
+        }
+        
         
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoSelectorCell
         
-        cell.backgroundColor = .green
+        cell.photoImageView.image = images[indexPath.item]
         
         return cell
     }

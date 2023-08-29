@@ -25,6 +25,7 @@
 		C6A18DA52A710A27000D7CEF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C6A18DA42A710A27000D7CEF /* FirebaseAuth */; };
 		C6A18DA72A710A27000D7CEF /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = C6A18DA62A710A27000D7CEF /* FirebaseDatabase */; };
 		C6A18DA92A710A27000D7CEF /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C6A18DA82A710A27000D7CEF /* FirebaseStorage */; };
+		C6A6D49F2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A6D49E2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift */; };
 		C6B5CD402A83A8F500E0DD65 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B5CD3F2A83A8F500E0DD65 /* HomeController.swift */; };
 		C6CF17252A9609FE002D9DD2 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CF17242A9609FD002D9DD2 /* PhotoSelectorController.swift */; };
 		C6FA133B2A8CC76B0082FDAA /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FA133A2A8CC76B0082FDAA /* LoginController.swift */; };
@@ -66,6 +67,7 @@
 		C695F32A2A73B32B00B08789 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C6A04C532A73F3B200C46DEF /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		C6A18D9F2A7105B1000D7CEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C6A6D49E2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		C6B5CD3F2A83A8F500E0DD65 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		C6CF17242A9609FD002D9DD2 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		C6FA133A2A8CC76B0082FDAA /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				C6CF17242A9609FD002D9DD2 /* PhotoSelectorController.swift */,
+				C6A6D49E2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift */,
 			);
 			path = AddPhoto;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6A6D49F2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift in Sources */,
 				C66FA30A2A6FD817008A40A9 /* SignUpController.swift in Sources */,
 				C66FA3062A6FD817008A40A9 /* AppDelegate.swift in Sources */,
 				C6B5CD402A83A8F500E0DD65 /* HomeController.swift in Sources */,
