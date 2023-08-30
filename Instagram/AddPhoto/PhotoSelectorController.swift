@@ -14,6 +14,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     let headerId = "headerId"
     
     var images = [UIImage]()
+    var selectedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,12 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellId)
         
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
         fetchPhotos()
         
     }
+
     
     fileprivate func fetchPhotos() {
         print("fetching photos")
@@ -53,6 +55,10 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                 
                 if let image = image {
                     self.images.append(image)
+                    
+                    if self.selectedImage == nil {
+                        self.selectedImage = image
+                    }
                 }
                 
                 // On cherche à rafraichir le collectionView. Pour savoir combien de fois, on calcule count (qui commence à 0, donc on doit faire allPhotos.count (il y en a 10) - 1).
@@ -64,6 +70,11 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         }
         
         
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedImage = images[indexPath.item]
+        self.collectionView.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -96,9 +107,9 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
-        
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! PhotoSelectorHeader
+
+        cell.headerImageView.image = selectedImage
         
         return cell
     }
