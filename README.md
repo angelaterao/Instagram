@@ -1,4 +1,7 @@
 # Instagram
+
+![LinkedIn - Instagram](https://github.com/angelaterao/Instagram/assets/118790712/134e7d15-5d29-465d-853e-85b85164ec4e)
+
 Rebuilding Instagram (done programmatically on Swift)
 
 Learning from the best: https://www.letsbuildthatapp.com/  
