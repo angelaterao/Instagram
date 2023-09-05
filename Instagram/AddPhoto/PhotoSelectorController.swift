@@ -19,6 +19,8 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
+        navigationItem.title = "New Post"
         
         collectionView.backgroundColor = .white
         
