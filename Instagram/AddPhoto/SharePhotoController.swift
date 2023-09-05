@@ -75,7 +75,6 @@ class SharePhotoController: UIViewController, UITextViewDelegate {
     }
     
     @objc func handleShare() {
-        print("Sharing photo")
 
         guard let image = self.imageView.image else { return }
         guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
