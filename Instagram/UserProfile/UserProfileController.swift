@@ -12,6 +12,7 @@ import FirebaseDatabase
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var user: User?
+    var posts = [Post]()
     
     let cellId = "cellId"
     let headerId = "headerId"
@@ -25,9 +26,40 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
          
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: cellId)
         
         setupLogOutButton()
+        
+        fetchPosts()
+        
+    }
+    
+    fileprivate func fetchPosts() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let ref = Database.database().reference().child("posts").child(uid)
+        
+        ref.observeSingleEvent(of: .value, with: { snapshot in
+            
+            guard let dictionnaries = snapshot.value as? [String: Any] else { return }
+            
+            dictionnaries.forEach({ key, value in
+                
+                guard let dictionnary = value as? [String: Any] else { return }
+                
+                let post = Post(dictionnary: dictionnary)
+                
+                self.posts.append(post)
+ 
+            })
+            
+            self.collectionView.reloadData()
+            
+        }) { (err) in
+            print("Failed to fetch posts:", err)
+        }
+          
         
     }
     
@@ -62,13 +94,13 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return posts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! UserProfilePhotoCell
         
-        cell.backgroundColor = .purple
+        cell.post = posts[indexPath.item]
         
         return cell
     }

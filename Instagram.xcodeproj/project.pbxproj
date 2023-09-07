@@ -20,6 +20,8 @@
 		C66FA3292A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA3282A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift */; };
 		C66FA3362A6FF504008A40A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C66FA3352A6FF504008A40A9 /* Extensions.swift */; };
 		C695F32B2A73B32B00B08789 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695F32A2A73B32B00B08789 /* MainTabBarController.swift */; };
+		C6994F512AA9BE590068190E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6994F502AA9BE590068190E /* Post.swift */; };
+		C6994F532AA9C14D0068190E /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6994F522AA9C14D0068190E /* UserProfilePhotoCell.swift */; };
 		C6A04C542A73F3B200C46DEF /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A04C532A73F3B200C46DEF /* UserProfileController.swift */; };
 		C6A18DA02A7105B1000D7CEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6A18D9F2A7105B1000D7CEF /* GoogleService-Info.plist */; };
 		C6A18DA32A710A27000D7CEF /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C6A18DA22A710A27000D7CEF /* FirebaseAnalytics */; };
@@ -68,6 +70,8 @@
 		C66FA3282A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C66FA3352A6FF504008A40A9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C695F32A2A73B32B00B08789 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C6994F502AA9BE590068190E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		C6994F522AA9C14D0068190E /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		C6A04C532A73F3B200C46DEF /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		C6A18D9F2A7105B1000D7CEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6A6D49E2A9DE3CB00ADC6CB /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 			children = (
 				C65BC4742A84D99B00E65D87 /* UserProfileHeader.swift */,
 				C6A04C532A73F3B200C46DEF /* UserProfileController.swift */,
+				C6994F522AA9C14D0068190E /* UserProfilePhotoCell.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 		C66FA3042A6FD817008A40A9 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				C6994F4F2AA9BE3D0068190E /* Models */,
 				C6CF17232A9609CE002D9DD2 /* AddPhoto */,
 				C6FA13392A8CC75A0082FDAA /* Login */,
 				C65BC4762A84D9A200E65D87 /* UserProfile */,
@@ -170,6 +176,14 @@
 				C66FA3282A6FD81A008A40A9 /* InstagramUITestsLaunchTests.swift */,
 			);
 			path = InstagramUITests;
+			sourceTree = "<group>";
+		};
+		C6994F4F2AA9BE3D0068190E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C6994F502AA9BE590068190E /* Post.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C6CF17232A9609CE002D9DD2 /* AddPhoto */ = {
@@ -338,6 +352,8 @@
 				C66FA30A2A6FD817008A40A9 /* SignUpController.swift in Sources */,
 				C66FA3062A6FD817008A40A9 /* AppDelegate.swift in Sources */,
 				C6B5CD402A83A8F500E0DD65 /* HomeController.swift in Sources */,
+				C6994F532AA9C14D0068190E /* UserProfilePhotoCell.swift in Sources */,
+				C6994F512AA9BE590068190E /* Post.swift in Sources */,
 				C65BC4752A84D99B00E65D87 /* UserProfileHeader.swift in Sources */,
 				C6FA133B2A8CC76B0082FDAA /* LoginController.swift in Sources */,
 				C6A04C542A73F3B200C46DEF /* UserProfileController.swift in Sources */,
