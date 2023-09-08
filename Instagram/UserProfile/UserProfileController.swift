@@ -30,38 +30,32 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         setupLogOutButton()
         
-        fetchPosts()
+        fetchOrderedPosts()
         
     }
     
-    fileprivate func fetchPosts() {
+    fileprivate func fetchOrderedPosts() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let ref = Database.database().reference().child("posts").child(uid)
         
-        ref.observeSingleEvent(of: .value, with: { snapshot in
+        ref.queryOrdered(byChild: "creationData").observe(.childAdded, with: { snapshot in
             
-            guard let dictionnaries = snapshot.value as? [String: Any] else { return }
+            guard let dictionnary = snapshot.value as? [String:Any] else { return }
             
-            dictionnaries.forEach({ key, value in
-                
-                guard let dictionnary = value as? [String: Any] else { return }
-                
-                let post = Post(dictionnary: dictionnary)
-                
-                self.posts.append(post)
- 
-            })
+            let post = Post(dictionnary: dictionnary)
+            
+            self.posts.append(post)
             
             self.collectionView.reloadData()
             
         }) { (err) in
             print("Failed to fetch posts:", err)
         }
-          
         
     }
+    
     
     fileprivate func setupLogOutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogOut))
